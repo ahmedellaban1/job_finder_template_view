@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from etc.choices import JOB_TYPE
-from etc.file_uploader import company_image_uploader
+from etc.file_uploader import company_image_uploader, category_logo_uploader
 # TODO: install django-countries
 
 class Job(models.Model):
@@ -19,7 +19,7 @@ class Job(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
-    logo = models.CharField(max_length=30)
+    logo = models.ImageField(upload_to=category_logo_uploader)
 
 
 class Company(models.Model):
