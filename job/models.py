@@ -2,11 +2,11 @@ from django.db import models
 from django.utils import timezone
 from etc.choices import JOB_TYPE
 from etc.file_uploader import company_image_uploader, category_logo_uploader
-# TODO: install django-countries
+from django_countries.fields import CountryField
 
 class Job(models.Model):
     title = models.CharField(max_length=120)
-    # location = C
+    location = CountryField()
     company = models.ForeignKey('Company', on_delete=models.CASCADE, related_name='job_company')
     created_at = models.DateTimeField(default=timezone.now)
     salary_start = models.IntegerField(null=True, blank=True)
@@ -15,11 +15,19 @@ class Job(models.Model):
     vacancy = models.IntegerField()
     job_type = models.CharField(choices=JOB_TYPE, default=JOB_TYPE[4][0], max_length=10)
     experience = models.IntegerField()
-    category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL, related_name='job_category')
+    category = models.ForeignKey('Category', null=True, blank=True,
+                                 on_delete=models.SET_NULL, related_name='job_category')
+
+    def __str__(self):
+        return self.title
+
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
     logo = models.ImageField(upload_to=category_logo_uploader)
+
+    def __str__(self):
+        return self.name
 
 
 class Company(models.Model):
@@ -28,3 +36,6 @@ class Company(models.Model):
     subtitle = models.TextField(max_length=1000)
     website = models.URLField()
     email = models.EmailField()
+
+    def __str__(self):
+        return self.name
