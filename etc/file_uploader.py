@@ -1,6 +1,7 @@
 import random
 from datetime import date
 
+
 def file_rename(file_name, number_digit):
     min_value = 10 ** (number_digit - 1)
     max_value = (10 ** number_digit) - 1
