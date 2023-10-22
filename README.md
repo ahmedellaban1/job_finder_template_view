@@ -46,7 +46,7 @@ python3 -V
 <hr>
 
 ## Folder structure
-![folder-structure.png](/home/ellaban/Django_Projects/training_course_tasks/django_job_finder/.git/img/folder-structure.png)
+![Screenshot from 2023-10-22 14-51-17](https://github.com/ahmedellaban1/job_finder_template_view/assets/75578565/d883b4b8-aaa3-4d41-99c8-d3db5b62e526)
 
 | Folder     | Description                                                             |
 |:-----------|:------------------------------------------------------------------------|
