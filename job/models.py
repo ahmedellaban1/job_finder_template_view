@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from etc.choices import JOB_TYPE
+from etc.file_uploader import company_image_uploader
 # TODO: install django-countries
 
 class Job(models.Model):
@@ -14,7 +15,7 @@ class Job(models.Model):
     vacancy = models.IntegerField()
     job_type = models.CharField(choices=JOB_TYPE, default=JOB_TYPE[4][0], max_length=10)
     experience = models.IntegerField()
-    category = models.ForeignKey('Category',null=True, blank=True, on_delete=models.SET_NULL, related_name='job_category')
+    category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL, related_name='job_category')
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
@@ -23,7 +24,7 @@ class Category(models.Model):
 
 class Company(models.Model):
     name = models.CharField(max_length=20)
-    logo = models.ImageField(upload_to='')
+    logo = models.ImageField(upload_to=company_image_uploader, null=True, blank=True)
     subtitle = models.TextField(max_length=1000)
     website = models.URLField()
     email = models.EmailField()
