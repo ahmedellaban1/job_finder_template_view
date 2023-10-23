@@ -39,9 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
 
     # installed modules, apps
-
+    'bootstrap4',
+    'django_filters',
     # my apps
     'job',
 ]
