@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block bodyContent %}
     <main>
 
@@ -68,7 +69,7 @@
                               <li>Vacancy : <span>{{job.vacancy}}</span></li>
                               <li>Job nature : <span>{{job.job_type}}</span></li>
                               <li>Salary :  <span>${{job.salary_start}} yearly</span></li>
-                              <li>Application date : <span>12 Sep 2020</span></li>
+                              <li>Application date : <span>{{job.created_at|naturaltime}}</span></li>
                           </ul>
                          <div class="apply-btn2">
                             <a href="#" class="btn">Apply Now</a>
