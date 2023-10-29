@@ -3,6 +3,7 @@ from django.utils import timezone
 from etc.choices import JOB_TYPE
 from etc.file_uploader import company_image_uploader, category_logo_uploader
 from django_countries.fields import CountryField
+from django.utils.text import slugify
 
 class Job(models.Model):
     title = models.CharField(max_length=120)
@@ -17,6 +18,12 @@ class Job(models.Model):
     experience = models.IntegerField()
     category = models.ForeignKey('Category', null=True, blank=True,
                                  on_delete=models.SET_NULL, related_name='job_category')
+    slug = models.SlugField(null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = ''
+        self.slug = slugify(self.title)
+        super(Job, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
