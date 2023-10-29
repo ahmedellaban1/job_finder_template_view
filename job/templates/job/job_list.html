@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load humanize %}
+<!--{# load humanize #}-->
 {% block bodyContent %}
 <main>
 
@@ -230,7 +230,7 @@
                                     </div>
                                     <div class="items-link items-link2 f-right">
                                         <a href="job_details.html">{{job.job_type}}</a>
-                                        <span>{{job.created_at| naturaltime}}</span>
+                                        <span>{{job.created_at}}</span>
                                     </div>
                                 </div>
                             {% endfor %}
