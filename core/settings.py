@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 
     # installed modules, apps
+    'django_summernote',
 
     # my apps
     'job',
