@@ -1,11 +1,13 @@
 from django.contrib import admin
+from django_summernote.admin import SummernoteModelAdmin
 from .models import Company, Job, Category
 
 
-class JobAdmin(admin.ModelAdmin):
+class JobAdmin(SummernoteModelAdmin):
     list_display = ('title', 'company', 'job_type', 'category')
     search_fields = ('title', 'description')
     list_filter = ('category', 'vacancy', 'experience')
+    summernote_fields = ('description', )
 
 
 class CategoryAdmin(admin.ModelAdmin):
