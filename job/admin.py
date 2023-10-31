@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django_summernote.admin import SummernoteModelAdmin
+from django_summernote.admin import SummernoteModelAdmin, SummernoteModelAdminMixin
 from .models import Company, Job, Category
 
 
@@ -7,7 +7,7 @@ class JobAdmin(SummernoteModelAdmin):
     list_display = ('title', 'company', 'job_type', 'category')
     search_fields = ('title', 'description')
     list_filter = ('category', 'vacancy', 'experience')
-    summernote_fields = ('description', )
+    summernote_fields = '__all__'
 
 
 class CategoryAdmin(admin.ModelAdmin):
