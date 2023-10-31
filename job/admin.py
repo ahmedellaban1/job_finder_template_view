@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin, SummernoteModelAdminMixin
-from .models import Company, Job, Category
+from .models import Company, Job, Category, JobApply
 
 
 class JobAdmin(SummernoteModelAdmin):
@@ -19,6 +19,11 @@ class CompanyAdmin(admin.ModelAdmin):
     search_fields = ('name', 'website', 'email')
 
 
+class JobApplyAdmin(admin.ModelAdmin):
+    list_display = ('email', 'linkedIn')
+
+
 admin.site.register(Job, JobAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Company, CompanyAdmin)
+admin.site.register(JobApply, JobApplyAdmin)

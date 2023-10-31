@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from .models import Job
+from .models import Job, JobApply
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import CreateView
 
 
 def job_list(request):
@@ -30,3 +31,11 @@ def job_details(request, **kwargs):
         'job': job
     }
     return render(request, 'job/job_details.html', context)
+
+
+class JopApplyView(CreateView):
+    model = JobApply
+    lockup_field ='id'
+    success_url = '/'
+    fields = ['email', 'linkedIn', 'github', 'cv', 'cover_litter']
+    template_name = 'job/apply_job.html'

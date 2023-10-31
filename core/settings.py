@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     # installed modules, apps
     'django_summernote',
+    'bootstrap4',
 
     # my apps
     'job',

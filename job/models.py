@@ -1,9 +1,10 @@
 from django.db import models
 from django.utils import timezone
 from etc.choices import JOB_TYPE
-from etc.file_uploader import company_image_uploader, category_logo_uploader
+from etc.file_uploader import company_image_uploader, category_logo_uploader, job_apply_cv_uploader
 from django_countries.fields import CountryField
 from django.utils.text import slugify
+# from django.contrib.auth.models import User
 
 class Job(models.Model):
     title = models.CharField(max_length=120)
@@ -49,3 +50,17 @@ class Company(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class JobApply(models.Model):
+    job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name='apply_job')
+    # user = TODO: absetract User model
+    email = models.EmailField()
+    linkedIn = models.URLField(help_text='please enter your linkedin-profile url')
+    github = models.URLField(null=True, blank=True, help_text='please enter your github url')
+    cv = models.FileField(upload_to=job_apply_cv_uploader, help_text='please upload your CV')
+    cover_litter = models.TextField(max_length=500, help_text='please enter your bio about yourself')
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.email
