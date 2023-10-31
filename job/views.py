@@ -3,7 +3,7 @@ from .models import Job, JobApply
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import CreateView
-from .forms import JobApplyForm
+from .forms import JobApplyForm, CreateJobForm
 
 def job_list(request):
     query = Job.objects.all()
@@ -51,4 +51,14 @@ class JopApplyView(CreateView):
         job_apply.job = job
         job_apply.save()
         return super().form_valid(form)
-    
+
+
+class CreateJobView(CreateView):
+    model = Job
+    form_class = CreateJobForm
+    success_url = '/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = 'Create New Job'
+        return context
