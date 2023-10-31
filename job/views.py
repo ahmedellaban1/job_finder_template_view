@@ -1,11 +1,9 @@
-from django.forms.models import BaseModelForm
-from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Job, JobApply
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import CreateView
-
+from .forms import JobApplyForm
 
 def job_list(request):
     query = Job.objects.all()
@@ -37,10 +35,10 @@ def job_details(request, **kwargs):
 
 class JopApplyView(CreateView):
     model = JobApply
-    lockup_field ='id'
     success_url = '/'
-    fields = ['email', 'linkedIn', 'github', 'cv', 'cover_litter']
+    # fields = ['email', 'linkedIn', 'github', 'cv', 'cover_litter']
     template_name = 'job/apply_job.html'
+    form_class = JobApplyForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

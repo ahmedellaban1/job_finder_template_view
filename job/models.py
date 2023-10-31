@@ -4,6 +4,7 @@ from etc.choices import JOB_TYPE
 from etc.file_uploader import company_image_uploader, category_logo_uploader, job_apply_cv_uploader
 from django_countries.fields import CountryField
 from django.utils.text import slugify
+from etc.validators import pdf_validator
 # from django.contrib.auth.models import User
 
 class Job(models.Model):
@@ -58,7 +59,7 @@ class JobApply(models.Model):
     email = models.EmailField()
     linkedIn = models.URLField(help_text='please enter your linkedin-profile url')
     github = models.URLField(null=True, blank=True, help_text='please enter your github url')
-    cv = models.FileField(upload_to=job_apply_cv_uploader, help_text='please upload your CV')
+    cv = models.FileField(upload_to=job_apply_cv_uploader, validators=[pdf_validator], help_text='please upload your CV')
     cover_litter = models.TextField(max_length=500, help_text='please enter your bio about yourself')
     created_at = models.DateTimeField(default=timezone.now)
 
