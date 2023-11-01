@@ -5,9 +5,9 @@ from etc.file_uploader import company_image_uploader, category_logo_uploader, jo
 from django_countries.fields import CountryField
 from django.utils.text import slugify
 from etc.validators import pdf_validator
-# from django.contrib.auth.models import User
-
+from users.models import CustomUser
 class Job(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     title = models.CharField(max_length=120)
     location = CountryField()
     company = models.ForeignKey('Company', on_delete=models.CASCADE, related_name='job_company')
@@ -55,7 +55,7 @@ class Company(models.Model):
 
 class JobApply(models.Model):
     job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name='apply_job')
-    # user = TODO: absetract User model
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     email = models.EmailField()
     linkedIn = models.URLField(help_text='please enter your linkedin-profile url')
     github = models.URLField(null=True, blank=True, help_text='please enter your github url')

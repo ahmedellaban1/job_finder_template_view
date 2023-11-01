@@ -6,9 +6,9 @@ from django.views.generic import CreateView
 from .forms import JobApplyForm, CreateJobForm
 
 
-def debug_job_queries(request, *args, **kwargs):
+def debug_job_queries(request):
     objects = Job.objects.select_related('company', 'category').all()
-    return render(request, 'job/debug.html', {"objects":objects})
+    return render(request, 'job/debug.html', {"objects": objects})
 
 
 def job_list(request):
@@ -42,7 +42,6 @@ def job_details(request, **kwargs):
 class JopApplyView(CreateView):
     model = JobApply
     success_url = '/'
-    # fields = ['email', 'linkedIn', 'github', 'cv', 'cover_litter']
     template_name = 'job/apply_job.html'
     form_class = JobApplyForm
 
@@ -55,6 +54,7 @@ class JopApplyView(CreateView):
         job = get_object_or_404(Job, slug=self.kwargs['slug'], id=self.kwargs['id'])
         job_apply = form.save(commit=False)
         job_apply.job = job
+        job_apply.user = self.request.user
         job_apply.save()
         return super().form_valid(form)
 
@@ -68,3 +68,9 @@ class CreateJobView(CreateView):
         context = super().get_context_data(**kwargs)
         context["page_title"] = 'Create New Job'
         return context
+
+    def form_valid(self, form):
+        create_job = form.save(commit=False)
+        create_job.user = self.request.user
+        create_job.save()
+        return super().form_valid(form)
