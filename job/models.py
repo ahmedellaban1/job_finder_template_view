@@ -6,6 +6,8 @@ from django_countries.fields import CountryField
 from django.utils.text import slugify
 from etc.validators import pdf_validator
 from users.models import CustomUser
+
+
 class Job(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     title = models.CharField(max_length=120)
