@@ -28,4 +28,4 @@ def job_apply_cv_uploader(instance, file_name):
 
 def user_image(instance, file_name):
     file = file_rename(file_name, 10)
-    return f'user/{instance.type}/{file[2]}/{instance.username}_{file[1]}_{instance.job.title}.{file[0]}'
+    return f'user/{instance.type}/{file[2]}/{instance.username}_{file[1]}.{file[0]}'
