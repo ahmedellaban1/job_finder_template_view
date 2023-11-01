@@ -24,3 +24,8 @@ def category_logo_uploader(instance, file_name):
 def job_apply_cv_uploader(instance, file_name):
     file = file_rename(file_name, 10)
     return f'CVs/{file[2]}/{file[1]}_{instance.job.title}.{file[0]}'
+
+
+def user_image(instance, file_name):
+    file = file_rename(file_name, 10)
+    return f'user/{instance.type}/{file[2]}/{instance.username}_{file[1]}_{instance.job.title}.{file[0]}'

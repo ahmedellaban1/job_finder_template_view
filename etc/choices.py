@@ -5,3 +5,9 @@ JOB_TYPE = (
     ('Freelance', 'Freelance'),
     ('UnDefined', 'UnDefined'),
 )
+
+USER_TYPE = (
+    ('manager', 'manager'),
+    ('freelancer', 'freelancer'),
+    ('client', 'client'),
+)
