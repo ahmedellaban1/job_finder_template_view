@@ -5,8 +5,14 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import CreateView
 from .forms import JobApplyForm, CreateJobForm
 
+
+def debug_job_queries(request, *args, **kwargs):
+    objects = Job.objects.select_related('company', 'category').all()
+    return render(request, 'job/debug.html', {"objects":objects})
+
+
 def job_list(request):
-    query = Job.objects.all()
+    query = Job.objects.select_related('company').all()
     jobs_count = query.count()
     page = request.GET.get('page', 1)
     paginator = Paginator(query, 50)
